@@ -1,14 +1,14 @@
-import { useContext, useEffect } from 'react'
-import { Badge, Layout } from 'antd'
-import { Client } from '@twilio/conversations'
+import { useContext, useEffect } from "react";
+import { Badge, Layout } from "antd";
+import { Client } from "@twilio/conversations";
 
-import { ReactComponent as Logo } from '../../assets/twilio-mark-red.svg'
+import { ReactComponent as Logo } from "../../assets/twilio-mark-red.svg";
 import {
   CreateNewConversation,
   ConversationsList,
-  Conversation
-} from '../../components'
-import { ConversationsContext } from '../../contexts'
+  Conversation,
+} from "../../components";
+import { ConversationsContext } from "../../contexts";
 import {
   BadgeContainer,
   BadgeSpan,
@@ -19,12 +19,12 @@ import {
   SelectedConversation,
   StyledPoweroffOutlined,
   SyledHeader,
-  SyledText
-} from './ConversationsPage.styles'
-import { getToken } from '../../services/functions'
-import { sortArray } from '../../helpers'
+  SyledText,
+} from "./ConversationsPage.styles";
+import { getToken } from "../../services/functions";
+import { sortArray } from "../../helpers";
 
-const { Content, Sider } = Layout
+const { Content, Sider } = Layout;
 
 export const ConversationsPage = (): JSX.Element => {
   const {
@@ -38,46 +38,46 @@ export const ConversationsPage = (): JSX.Element => {
     setIsLoading,
     client,
     setClient,
-    setIdentity
-  } = useContext(ConversationsContext)
+    setIdentity,
+  } = useContext(ConversationsContext);
 
   useEffect(() => {
     try {
       const fetchConversations = async () => {
-        setBadgeStatus('warning')
-        setBadgeText('Loading conversations list')
+        setBadgeStatus("warning");
+        setBadgeText("Loading conversations list");
 
-        const { accessToken } = await getToken(identity)
-        const client = new Client(accessToken)
-        setClient(client)
+        const { accessToken } = await getToken(identity);
+        const client = new Client(accessToken);
+        setClient(client);
 
-        const { items } = await client.getSubscribedConversations()
+        const { items } = await client.getSubscribedConversations();
         if (items.length > 0) {
-          const sortedArr = sortArray(items)
-          setConversations(sortedArr)
+          const sortedArr = sortArray(items);
+          setConversations(sortedArr);
         }
 
-        setBadgeStatus('success')
-        setBadgeText('Connected')
-      }
-      fetchConversations()
+        setBadgeStatus("success");
+        setBadgeText("Connected");
+      };
+      fetchConversations();
     } catch (error) {
-      console.log(error)
-      setBadgeStatus('error')
-      setBadgeText('An error has occured')
+      console.log(error);
+      setBadgeStatus("error");
+      setBadgeText("An error has occured");
     }
-  }, [])
+  }, []);
 
   const handlePowerOff = () => {
-    setIsLoading(true)
-    setBadgeStatus('warning')
-    setBadgeText('Disconnecting')
-    setClient(null)
-    setIdentity('')
-    window.location.reload()
-  }
+    setIsLoading(true);
+    setBadgeStatus("warning");
+    setBadgeText("Disconnecting");
+    setClient(null);
+    setIdentity("");
+    window.location.reload();
+  };
 
-  const hasConversations = conversations.length > 0
+  const hasConversations = conversations.length > 0;
 
   return (
     <ConversationsWindowWrapper>
@@ -96,7 +96,7 @@ export const ConversationsPage = (): JSX.Element => {
           </PowerOffContainer>
         </SyledHeader>
         <Layout>
-          <Sider theme={'light'} width={270}>
+          <Sider theme={"light"} width={270}>
             {client && (
               <>
                 <CreateNewConversation />
@@ -112,5 +112,5 @@ export const ConversationsPage = (): JSX.Element => {
         </Layout>
       </ConversationsWindowContainer>
     </ConversationsWindowWrapper>
-  )
-}
+  );
+};

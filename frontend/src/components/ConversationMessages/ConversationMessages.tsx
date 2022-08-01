@@ -1,14 +1,14 @@
-import { Spin } from 'antd'
-import { useContext, useEffect } from 'react'
-import { Message } from '@twilio/conversations'
+import { Spin } from "antd";
+import { useContext, useEffect } from "react";
+import { Message } from "@twilio/conversations";
 
-import { ConversationsContext } from '../../contexts'
-import { MessageBubble } from '../MessageBubble'
+import { ConversationsContext } from "../../contexts";
+import { MessageBubble } from "../MessageBubble";
 import {
   ConversationMessagesContainer,
   SpinnerContainer,
-  StyledUl
-} from './ConversationMessages.styles'
+  StyledUl,
+} from "./ConversationMessages.styles";
 
 export const ConversationMessages = (): JSX.Element => {
   const {
@@ -18,27 +18,27 @@ export const ConversationMessages = (): JSX.Element => {
     messages,
     identity,
     showModal,
-    isLoading
-  } = useContext(ConversationsContext)
+    isLoading,
+  } = useContext(ConversationsContext);
 
   useEffect(() => {
     if (conversation) {
-      conversation.on('messageAdded', message => {
-        setIsLoading(true)
-        setMessages(oldMessages => [...oldMessages, message])
-        setIsLoading(false)
-      })
+      conversation.on("messageAdded", (message) => {
+        setIsLoading(true);
+        setMessages((oldMessages) => [...oldMessages, message]);
+        setIsLoading(false);
+      });
     }
-  }, [conversation])
+  }, [conversation]);
 
-  const hasMessages = messages.length > 0
-  const hasSpinner = showModal || isLoading
+  const hasMessages = messages.length > 0;
+  const hasSpinner = showModal || isLoading;
 
   return (
     <>
       {hasSpinner ? (
         <SpinnerContainer>
-          <Spin tip='Loading' size='large' />
+          <Spin tip="Loading" size="large" />
         </SpinnerContainer>
       ) : (
         <ConversationMessagesContainer>
@@ -46,7 +46,7 @@ export const ConversationMessages = (): JSX.Element => {
             {hasMessages &&
               messages.map((m: Message) => {
                 const direction =
-                  m.author === identity ? 'outgoing' : 'incoming'
+                  m.author === identity ? "outgoing" : "incoming";
 
                 return (
                   <MessageBubble
@@ -54,11 +54,11 @@ export const ConversationMessages = (): JSX.Element => {
                     message={m}
                     messageDirection={direction}
                   />
-                )
+                );
               })}
           </StyledUl>
         </ConversationMessagesContainer>
       )}
     </>
-  )
-}
+  );
+};

@@ -1,13 +1,13 @@
-import { Conversation } from '@twilio/conversations'
-import { useContext, useEffect, useState } from 'react'
+import { Conversation } from "@twilio/conversations";
+import { useContext, useEffect, useState } from "react";
 
-import { ConversationsContext } from '../../contexts'
-import { sortArray } from '../../helpers'
+import { ConversationsContext } from "../../contexts";
+import { sortArray } from "../../helpers";
 import {
   StyledList,
   ConversationsListItem,
-  StyledText
-} from './ConversationsList.styles'
+  StyledText,
+} from "./ConversationsList.styles";
 
 export const ConversationsList = (): JSX.Element => {
   const {
@@ -21,49 +21,49 @@ export const ConversationsList = (): JSX.Element => {
     setLocalSid,
     client,
     setBadgeStatus,
-    setBadgeText
-  } = useContext(ConversationsContext)
+    setBadgeText,
+  } = useContext(ConversationsContext);
   const [sortedConvos, setSortedConvos] =
-    useState<Conversation[]>(conversations)
+    useState<Conversation[]>(conversations);
 
   useEffect(() => {
-    const sortedArr = sortArray(conversations)
-    setSortedConvos(sortedArr)
-  }, [setSortedConvos, conversations])
+    const sortedArr = sortArray(conversations);
+    setSortedConvos(sortedArr);
+  }, [setSortedConvos, conversations]);
 
   const handleOnClick = async (sid: string) => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
-      setBadgeStatus('warning')
-      setBadgeText('Entering conversation')
+      setBadgeStatus("warning");
+      setBadgeText("Entering conversation");
 
       if (client) {
-        const convo = await client.getConversationBySid(sid)
-        const convoParticipant = await convo.getParticipants()
-        const convoMessages = await convo.getMessages()
-        setMessages(convoMessages.items)
-        setLocalSid(sid)
+        const convo = await client.getConversationBySid(sid);
+        const convoParticipant = await convo.getParticipants();
+        const convoMessages = await convo.getMessages();
+        setMessages(convoMessages.items);
+        setLocalSid(sid);
 
         const isAlreadyParticipant = convoParticipant.find(
-          p => p.identity === identity
-        )
-        if (!isAlreadyParticipant) await convo.add(identity)
+          (p) => p.identity === identity
+        );
+        if (!isAlreadyParticipant) await convo.add(identity);
 
-        setConversation(convo)
+        setConversation(convo);
 
-        setBadgeStatus('success')
-        setBadgeText('Connected')
-        setIsLoading(false)
+        setBadgeStatus("success");
+        setBadgeText("Connected");
+        setIsLoading(false);
       }
     } catch (error) {
-      setConversation(null)
-      setIsLoading(false)
-      console.log(error)
-      setBadgeStatus('error')
-      setBadgeText('You are not allowed to enter this conversation')
+      setConversation(null);
+      setIsLoading(false);
+      console.log(error);
+      setBadgeStatus("error");
+      setBadgeText("You are not allowed to enter this conversation");
     }
-  }
+  };
 
   return (
     <StyledList
@@ -80,5 +80,5 @@ export const ConversationsList = (): JSX.Element => {
         </ConversationsListItem>
       )}
     />
-  )
-}
+  );
+};
