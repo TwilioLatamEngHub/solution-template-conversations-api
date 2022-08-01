@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import { Badge, Layout } from 'antd'
 import { Client } from '@twilio/conversations'
 
-import Logo from '../../assets/twilio-mark-red.svg'
+import { ReactComponent as Logo } from '../../assets/twilio-mark-red.svg'
 import {
   CreateNewConversation,
   ConversationsList,
