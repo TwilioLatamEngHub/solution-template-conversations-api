@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { Layout, Button, Input, Form, Col } from 'antd'
 
-import { ReactComponent as Logo } from '../../assets/twilio-mark-red.svg'
+import Logo from '../../assets/twilio-mark-red.svg'
 import { ConversationsContext } from '../../contexts'
 import {
   StyledCard,

@@ -10,10 +10,11 @@ require('esbuild')
     loader: {
       '.png': 'file',
       '.js': 'jsx',
+      '.svg': 'file'
     },
-    inject: ['./bootstrap/process-shim.dev.js'],
+    inject: ['./bootstrap/process-shim.dev.js']
   })
-  .then((value) => {
+  .then(value => {
     console.log(value)
     return value
   })
