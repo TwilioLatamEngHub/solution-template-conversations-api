@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { Spin, Modal } from "antd";
-import { WarningOutlined } from "@ant-design/icons";
-import { Message } from "@twilio/conversations";
+import { useEffect } from 'react'
+import { Spin, Modal } from 'antd'
+import { WarningOutlined } from '@ant-design/icons'
+import { Message } from '@twilio/conversations'
 
 import {
   MediaWrapper,
@@ -9,28 +9,26 @@ import {
   PicturePreviewContainer,
   StyledEyeOutlined,
   StyledImage,
-  WarningWrapper,
-} from "./Media.styles";
-import { MessageDirection } from "./MessageBubble";
+  WarningWrapper
+} from './Media.styles'
+import { MessageDirection } from './MessageBubble'
 
 interface MediaProps {
-  hasFailed: boolean;
-  url: string | null;
-  message: Message;
-  messageDirection: MessageDirection;
+  hasFailed: boolean
+  url: string | null
+  message: Message
+  messageDirection: MessageDirection
 }
 
 export const Media = ({
   hasFailed,
   url,
   message,
-  messageDirection,
+  messageDirection
 }: MediaProps): JSX.Element => {
   useEffect(() => {
-    document
-      .getElementById(message.sid)
-      ?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+    document.getElementById(message.sid)?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
 
   return (
     <MediaWrapper
@@ -38,19 +36,19 @@ export const Media = ({
         Modal.info({
           centered: true,
           icon: null,
-          okText: "Close",
+          okText: 'Close',
           content: (
             <PictureContainer>
-              {url && <StyledImage src={url} alt={"an alternative"} />}
+              {url && <StyledImage src={url} alt={'an alternative'} />}
             </PictureContainer>
-          ),
-        });
+          )
+        })
       }}
     >
       {!url && !hasFailed && <Spin />}
       {hasFailed && (
         <WarningWrapper>
-          <WarningOutlined style={{ fontSize: "5em" }} />
+          <WarningOutlined style={{ fontSize: '5em' }} />
           <p>Failed to load media</p>
         </WarningWrapper>
       )}
@@ -61,5 +59,5 @@ export const Media = ({
         </PicturePreviewContainer>
       )}
     </MediaWrapper>
-  );
-};
+  )
+}

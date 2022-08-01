@@ -1,1 +1,1 @@
-export * from "./ViewParticipantsButton";
+export * from './ViewParticipantsButton'

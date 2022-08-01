@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   WhatsAppOutlined,
   MessageOutlined,
-  MobileOutlined,
-} from "@ant-design/icons";
-import { ParticipantType, Message } from "@twilio/conversations";
+  MobileOutlined
+} from '@ant-design/icons'
+import { ParticipantType, Message } from '@twilio/conversations'
 
 import {
   BodySpan,
@@ -13,85 +13,82 @@ import {
   BubbleIconWrapper,
   DateSpan,
   StyledDiv,
-  StyledLi,
-} from "./MessageBubble.styles";
-import { Media } from "./Media";
-import { CHAT_BINDING, SMS_BINDING, WA_BINDING } from "../Buttons";
+  StyledLi
+} from './MessageBubble.styles'
+import { Media } from './Media'
+import { CHAT_BINDING, SMS_BINDING, WA_BINDING } from '../Buttons'
 
 const handleBubbleIcon = (type: ParticipantType) => {
   if (type) {
     switch (type) {
       case CHAT_BINDING:
-        return <MessageOutlined style={{ fontSize: "16px" }} />;
+        return <MessageOutlined style={{ fontSize: '16px' }} />
       case WA_BINDING:
-        return <WhatsAppOutlined style={{ fontSize: "16px" }} />;
+        return <WhatsAppOutlined style={{ fontSize: '16px' }} />
       case SMS_BINDING:
-        return <MobileOutlined />;
+        return <MobileOutlined />
       default:
-        break;
+        break
     }
   }
-};
+}
 
-export type MessageDirection = "outgoing" | "incoming";
+export type MessageDirection = 'outgoing' | 'incoming'
 
 interface MessageBubbleProps {
-  messageDirection: MessageDirection;
-  message: Message;
+  messageDirection: MessageDirection
+  message: Message
 }
 
 export const MessageBubble = ({
   messageDirection,
-  message,
+  message
 }: MessageBubbleProps): JSX.Element => {
   const [participantType, setParticipantType] =
-    useState<ParticipantType>("chat");
-  const [hasMedia, setHasMedia] = useState<boolean>(false);
-  const [mediaDownloadFailed, setMediaDownloadFailed] =
-    useState<boolean>(false);
-  const [mediaUrl, setMediaUrl] = useState<string | null>(null);
+    useState<ParticipantType>('chat')
+  const [hasMedia, setHasMedia] = useState<boolean>(false)
+  const [mediaDownloadFailed, setMediaDownloadFailed] = useState<boolean>(false)
+  const [mediaUrl, setMediaUrl] = useState<string | null>(null)
 
-  const messageDateCreated = message.dateCreated?.toLocaleString("en-US", {
-    weekday: "short",
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
+  const messageDateCreated = message.dateCreated?.toLocaleString('en-US', {
+    weekday: 'short',
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  })
 
   useEffect(() => {
     const fetchType = async () => {
       try {
-        const participant = await message.getParticipant();
-        setParticipantType(participant.type);
+        const participant = await message.getParticipant()
+        setParticipantType(participant.type)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    };
+    }
 
     const fetchMedia = async () => {
       try {
-        const mediaArr = message.attachedMedia;
+        const mediaArr = message.attachedMedia
         if (mediaArr && mediaArr[0]) {
-          setHasMedia(true);
-          const url = await mediaArr[0].getContentTemporaryUrl();
-          setMediaUrl(url);
+          setHasMedia(true)
+          const url = await mediaArr[0].getContentTemporaryUrl()
+          setMediaUrl(url)
         }
       } catch (error) {
-        console.log(error);
-        setMediaDownloadFailed(true);
+        console.log(error)
+        setMediaDownloadFailed(true)
       }
-    };
+    }
 
-    fetchType();
-    fetchMedia();
+    fetchType()
+    fetchMedia()
 
-    document
-      .getElementById(message.sid)
-      ?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+    document.getElementById(message.sid)?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
 
   return (
     <StyledLi id={message.sid}>
@@ -114,5 +111,5 @@ export const MessageBubble = ({
         <DateSpan>{messageDateCreated}</DateSpan>
       </StyledDiv>
     </StyledLi>
-  );
-};
+  )
+}

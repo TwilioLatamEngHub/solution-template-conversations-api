@@ -1,1 +1,1 @@
-export * from "./CreateNewConversation";
+export * from './CreateNewConversation'

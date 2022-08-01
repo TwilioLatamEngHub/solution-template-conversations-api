@@ -1,9 +1,9 @@
-import { List, Typography } from "antd";
-import styled from "styled-components";
+import { List, Typography } from 'antd'
+import styled from 'styled-components'
 
-import { COLOR_TWILIO_RED, COLOR_NAVY_BLUE, COLOR_WHITE } from "../../helpers";
+import { COLOR_TWILIO_RED, COLOR_NAVY_BLUE, COLOR_WHITE } from '../../helpers'
 
-const { Text } = Typography;
+const { Text } = Typography
 
 export const StyledList = styled<any>(List)`
   cursor: pointer;
@@ -11,12 +11,12 @@ export const StyledList = styled<any>(List)`
   &:active {
     background-color: ${COLOR_NAVY_BLUE};
   }
-`;
+`
 
 export const ConversationsListItem = styled(List.Item)<{
-  $isItemActive: boolean;
+  $isItemActive: boolean
 }>`
-  background-color: ${(props) =>
+  background-color: ${props =>
     props.$isItemActive ? COLOR_NAVY_BLUE : COLOR_TWILIO_RED};
   -webkit-transition: background-color 0.5s ease-out;
   -moz-transition: background-color 0.5s ease-out;
@@ -29,8 +29,8 @@ export const ConversationsListItem = styled(List.Item)<{
     margin-right: -2px;
     margin-left: -1px;
   }
-`;
+`
 
 export const StyledText = styled(Text)`
   color: ${COLOR_WHITE};
-`;
+`
