@@ -1,35 +1,21 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "target": "ES6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "es5",
+    "downlevelIteration": true,
+    "lib": ["dom", "dom.iterable", "esnext", "ES2018.Promise"],
     "allowJs": true,
-    "checkJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "outDir": "./build",
-    "declarationMap": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "ES6",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": false,
-    "declaration": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/**/*.js",
-    "src/**/*.test.ts"
-  ]
+  "include": ["src"]
 }
