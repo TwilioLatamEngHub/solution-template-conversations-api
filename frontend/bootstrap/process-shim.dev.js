@@ -1,3 +1,5 @@
 import * as env from 'env'
 
-export let process = { ...env, PACKAGE_NAME }
+export let process = {
+  env: { ...env, PACKAGE_NAME }
+}

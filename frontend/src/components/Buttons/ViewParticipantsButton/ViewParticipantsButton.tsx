@@ -59,6 +59,7 @@ export const ViewParticipantsButton = (): JSX.Element => {
     }
   }
 
+  console.log(participants)
   return conversation ? (
     <ConvoHeaderContainer>
       <FriendlyName>{conversation.friendlyName}</FriendlyName>
@@ -77,7 +78,7 @@ export const ViewParticipantsButton = (): JSX.Element => {
             <ParticipantsModalContainer key={p.sid}>
               <UserOutlined />
               <ParticipantsModalUsers>
-                {p.identity || p.bindings.whatsapp.address}
+                {p.identity || p.bindings.whatsapp?.address || p.bindings.sms?.address}
               </ParticipantsModalUsers>
               <ParticipantsModalRemove onClick={() => handleRemove(p)}>
                 Remove
