@@ -22,7 +22,7 @@ The following instructions assume you already have a [Twilio Number](https://www
 
 2. Under the Messaging Product, create a new service: Services > Create Messaging Service.
 
-3. Inside your service under Sender Pool, click on Add Senders and add your WhatsApp number.
+3. Inside your service under Sender Pool, click on Add Senders and add your Twilio number (the WhatsApp Sender Twilio number).
 
 4. Under the Conversations Product, create a new service: Services > Create a new service.
 
