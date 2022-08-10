@@ -10,6 +10,7 @@ const { Text } = Typography
 export const ConversationsWindowWrapper = styled.div`
   height: inherit;
   background-color: #f0f2f5;
+  width: 100%;
 `
 
 export const ConversationsWindowContainer = styled(Layout)`
