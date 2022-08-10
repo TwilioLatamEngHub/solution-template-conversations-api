@@ -149,10 +149,10 @@ export const AddParticipantButton = ({
         </Input.Group>
         {binding === WA_BINDING && (
           <p style={{ marginTop: '1em' }}>
-            <strong>IMPORTANT:</strong> After you submit your number, you need
-            to send a WhatsApp message to +5511952130034 in order to participate
-            in the conversation, otherwise your number will be only reachable
-            through WhatsApp Templates.{' '}
+            <strong>IMPORTANT:</strong> After you submit your number, it will
+            only be reachable if you send a WhatsApp Template to it, or if you
+            send a message from your WhatsApp to your Twilio number configured
+            in the serverless funcion.{' '}
             <a
               href='https://www.twilio.com/docs/conversations/using-whatsapp-conversations'
               target='_blank'
