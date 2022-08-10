@@ -5,7 +5,10 @@ import styled from 'styled-components'
 const { Content } = Layout
 
 export const StyledContent = styled(Content)`
-  height: 100vh;
+  min-height: 300px;
+  min-width: 400px;
+  height: 100%;
+  width: 100%;
 `
 
 export const StyledRowContainer = styled(Row)`
