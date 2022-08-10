@@ -1,8 +1,6 @@
 import { ParticipantType } from '@twilio/conversations'
 
-
 const handleFetches = async (url: string, queries?: string) => {
-  console.log({url})
   const fetchUrl = queries ? `${url}${queries}` : url
   return await fetch(fetchUrl)
     .then(res => res.json())
@@ -47,12 +45,16 @@ export const addParticipant = async ({
   }
 
   return (
-    process.env.REACT_APP_ADD_PARTICIPANT_URL && (await handleFetches(process.env.REACT_APP_ADD_PARTICIPANT_URL, queries))
+    process.env.REACT_APP_ADD_PARTICIPANT_URL &&
+    (await handleFetches(process.env.REACT_APP_ADD_PARTICIPANT_URL, queries))
   )
 }
 
 export const getToken = async (identity: string): Promise<GetTokenReturn> => {
   const queries = `?identity=${identity}`
 
-  return process.env.REACT_APP_GET_TOKEN && (await handleFetches(process.env.REACT_APP_GET_TOKEN, queries))
+  return (
+    process.env.REACT_APP_GET_TOKEN &&
+    (await handleFetches(process.env.REACT_APP_GET_TOKEN, queries))
+  )
 }

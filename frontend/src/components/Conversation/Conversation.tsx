@@ -148,9 +148,9 @@ export const Conversation = (): JSX.Element => {
             disabled={buttonIsLoading}
           />
           <Select
-            placeholder={'WhatsApp Templates'}
             style={{ width: '40rem', fontSize: '14px', marginTop: '0.5rem' }}
             onChange={handleSelectChange}
+            value={newMessage || 'WhatsApp Templates'}
           >
             <Option value={templateOne}>{templateOne}</Option>
             <Option value={templateTwo}>{templateTwo}</Option>
@@ -161,6 +161,7 @@ export const Conversation = (): JSX.Element => {
             htmlType='submit'
             style={{ minWidth: '5rem', fontSize: '14px' }}
             loading={buttonIsLoading}
+            disabled={newMessage === ''}
           >
             Enter
           </Button>
